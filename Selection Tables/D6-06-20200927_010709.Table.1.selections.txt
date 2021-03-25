@@ -1,0 +1,6 @@
+Selection	View	Channel	Begin Time (s)	End Time (s)	Low Freq (Hz)	High Freq (Hz)	Begin File	Begin Path	Label
+1	Spectrogram 1	1	199.211996915	203.200714859	1046.9	2419.8	20200927_010709.WAV	D:\Fauna & Flora International\VietnamAudioStorage - Root\Trung Khanh\2020 Survey\Raw Audio Files\Phase 2 (Deployed - September to October)\D6\06\20200927_010709.WAV	gc
+2	Spectrogram 1	1	250.116445684	252.473415378	958.0	1590.1	20200927_010709.WAV	D:\Fauna & Flora International\VietnamAudioStorage - Root\Trung Khanh\2020 Survey\Raw Audio Files\Phase 2 (Deployed - September to October)\D6\06\20200927_010709.WAV	mm
+3	Spectrogram 1	1	261.719988794	266.373493063	938.3	1521.0	20200927_010709.WAV	D:\Fauna & Flora International\VietnamAudioStorage - Root\Trung Khanh\2020 Survey\Raw Audio Files\Phase 2 (Deployed - September to October)\D6\06\20200927_010709.WAV	mm
+4	Spectrogram 1	1	274.471799192	280.334005867	1076.5	1649.4	20200927_010709.WAV	D:\Fauna & Flora International\VietnamAudioStorage - Root\Trung Khanh\2020 Survey\Raw Audio Files\Phase 2 (Deployed - September to October)\D6\06\20200927_010709.WAV	mm
+5	Spectrogram 1	1	292.022884397	297.220304749	997.5	1560.5	20200927_010709.WAV	D:\Fauna & Flora International\VietnamAudioStorage - Root\Trung Khanh\2020 Survey\Raw Audio Files\Phase 2 (Deployed - September to October)\D6\06\20200927_010709.WAV	mm
