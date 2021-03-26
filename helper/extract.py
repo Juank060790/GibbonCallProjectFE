@@ -46,7 +46,10 @@ def extractAudio(df: pd.DataFrame, sample_rate: int,
         - alpha: int. How many seconds to slide over a given timestamp. 
         - jump_seconds: int. Hops between sliding window. 
     * Returns: 
-        - 
+        - An array contained a gibbon call extracted into segment.
+    * TODO:
+        - Determine how we want to deal with non-gibbon class and extract 
+        accordingly.
     '''
 
     audio, _ = librosa.load(df["Path"][0], sr = sample_rate)

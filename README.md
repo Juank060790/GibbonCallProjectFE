@@ -2,9 +2,13 @@
 * Changes: 
      - extract.py: Added helper functions
      - **TODO**: 
-          1) Analyze data. Most likely will have to fix the sliding 
-          window/hopping length according to our data (see extract.py).
+          1) Determine approach to extracting data, i.e hop length, what 
+          data to keep...
           2) Run data extraction and see how many gibbon segments we have. 
+* Logs:
+     - 03/25/2021: Helper function to extract path and audio segments 
+     (see helper/extract.py)
+     - 03/26/2021: Analzyed data (see EDA.ipynb). 
 * NOTE: 
      - The **BIG** problem with our dataset is that we're assuming input 
      segments only contain gibbon, bird + insects, individually. In reality, 
