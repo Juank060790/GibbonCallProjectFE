@@ -1,4 +1,4 @@
-* Last updated: 03/26/2021
+* Last updated: 03/27/2021
 * Changes: 
      - extract.py: Added helper functions
      - **TODO**: 
@@ -7,8 +7,11 @@
           2) Run data extraction and see how many gibbon segments we have. 
 * Logs:
      - 03/25/2021: Helper function to extract path and audio segments 
-     (see helper/extract.py)
-     - 03/26/2021: Analzyed data (see EDA.ipynb). 
+     (see helper/extract.py).
+     - 03/26/2021: Analzyed data (see EDA.ipynb).
+     - 03/27/2021: Analyzed research paper's label (see EDA.ipynb).
+          - **Findings**: They only cared about the longest duration of the 
+          calling bout.           
 * NOTE: 
      - The **BIG** problem with our dataset is that we're assuming input 
      segments only contain gibbon, bird + insects, individually. In reality, 
@@ -37,6 +40,9 @@
      |--- extract.py: Helper functions to extract raw audio files. 
 |--- _Raw Audio Files
      |--- **\*.WAV, raw audio files.
+|--- _research_paper
+     |--- Train_Labels: Research paper's labelling
+     |--- research.pdf
 |--- _Selection Tables
      |--- *.txt, labelled segments in an audio.
 |--- README.md
