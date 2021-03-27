@@ -16,7 +16,9 @@
      - The **BIG** problem with our dataset is that we're assuming input 
      segments only contain gibbon, bird + insects, individually. In reality, 
      audio segments may overlapped. 
-     - Solutions:
+     - Research paper dealt with this problem by blending non-gibbon audio 
+     and gibbon audio.
+     - Other solutions:
           1) Sound synthesis (could be risky).
           2) Autoencoder (detect the nature of gibbon call).
           3) Independent component analysis 
