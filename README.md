@@ -11,7 +11,7 @@
      - 03/26/2021: Analzyed data (see EDA.ipynb).
      - 03/27/2021: Analyzed research paper's label (see EDA.ipynb).
           - **Findings**: They only cared about the longest duration of the 
-          calling bout.           
+          calling bout when choosing window size.           
 * NOTE: 
      - The **BIG** problem with our dataset is that we're assuming input 
      segments only contain gibbon, bird + insects, individually. In reality, 
