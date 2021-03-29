@@ -1,6 +1,8 @@
-* Last updated: 03/27/2021
+* Last updated: 03/29/2021
 * Changes: 
-     - extract.py: Added helper functions
+     - extract.py: Extracted gibbon and non-gibbon calls 
+     - preprocessing.py: Helper function to extract audio segments and store 
+                         into .pkl files. 
      - **TODO**: 
           1) Determine approach to extracting data, i.e hop length, what 
           data to keep...
@@ -11,7 +13,8 @@
      - 03/26/2021: Analzyed data (see EDA.ipynb).
      - 03/27/2021: Analyzed research paper's label (see EDA.ipynb).
           - **Findings**: They only cared about the longest duration of the 
-          calling bout.           
+          calling bout. 
+          
 * NOTE: 
      - The **BIG** problem with our dataset is that we're assuming input 
      segments only contain gibbon, bird + insects, individually. In reality, 
@@ -38,6 +41,9 @@
 **Directory Path**:
 ```
 .
+|--- _extracted_audio
+     |--- _gibbon: Gibbon audio segments extracted from raw data.
+     |--- _non_gibbon: Non-gibbon audio segments extracted from raw data. 
 |--- _helper 
      |--- extract.py: Helper functions to extract raw audio files. 
 |--- _Raw Audio Files

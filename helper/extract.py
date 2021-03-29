@@ -10,8 +10,8 @@ def readLabels(path: str, sample_rate: int):
     * Purpose: Given a path to a text file containing the labels, read in the 
     information and convert it to a dataframe. 
     * Parameters: 
-        path: str. Path to file containing the labels. 
-        sample_rate: int. Audio sampling rate. 
+        path: Path to file containing the labels. 
+        sample_rate: Audio sampling rate. 
     * Returns:  
         df: pd.DataFrame. Columns are start and end timestamps converted in 
         sample rate, path to audio, and the label.
@@ -36,33 +36,30 @@ def readLabels(path: str, sample_rate: int):
 
     return df 
 
-def extractAudio(df: pd.DataFrame, sample_rate: int, 
+def extractAudio(df: pd.DataFrame, audio: np.ndarray, sample_rate: int, 
                  alpha: int = 10, jump_seconds: int = 1):
     '''
     * Purpose: Extract calls using a sliding window approach.
     * Parameters:
-        - df: pd.DataFrame. Contains timestamps and labels.
-        - sample_rate: int. Audio sampling rate. 
-        - alpha: int. How many seconds to slide over a given timestamp. 
-        - jump_seconds: int. Hops between sliding window. 
+        - df: Contains timestamps and labels.
+        - audio: Librosa loaded audio
+        - sample_rate: Audio sampling rate. 
+        - alpha: How many seconds to slide over a given timestamp. 
+        - jump_seconds: Hops between sliding window. 
     * Returns: 
-        - An array contained a gibbon call extracted into segment.
+        - An array containing gibbon segments and an array containing 
+        non-gibbon segments. 
     * TODO:
         - Determine how we want to deal with non-gibbon class and extract 
         accordingly.
     '''
 
-    audio, _ = librosa.load(df["Path"][0], sr = sample_rate)
 
-    keys = ["gc", "mm", "sc"]
+    positive = ["gc", "mm", "sc"]
     alpha_converted = alpha * sample_rate 
-    gibbon = []
+    gibbon, non_gibbon = [], []
 
     for _, row in df.iterrows():
-
-        if row["Label"] not in keys:
-            continue 
-
         jump = 0
         while True:
             start_position = row["Start"] - sample_rate - \
@@ -72,9 +69,15 @@ def extractAudio(df: pd.DataFrame, sample_rate: int,
 
             if end_position <= row["End"]:
                 break 
-            
-            gibbon.append(audio[int(start_position):int(end_position)])
-    
-    return np.asarray(gibbon, dtype = "object")
+
+            extract_segment = audio[int(start_position): int(end_position)]
+
+            if row["Label"] in positive:
+                gibbon.append(extract_segment)
+            else:
+                non_gibbon.append(extract_segment)
+        
+    return np.asarray(gibbon, dtype = "object"), \
+        np.asarray(non_gibbon, dtype = "object")
 
 
