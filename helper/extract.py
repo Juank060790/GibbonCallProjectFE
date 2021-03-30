@@ -82,11 +82,7 @@ def extractAudio(df: pd.DataFrame, audio: np.ndarray, sample_rate: int,
             elif matched:
                 non_gibbon.append(extract_segment)
     
-    gibbon = np.asarray(gibbon)
-    non_gibbon = np.asarray(non_gibbon)
-
-
-    return gibbon, non_gibbon 
+    return np.asarray(gibbon), np.asarray(non_gibbon)
 
 def extractSpectrogram(audio: np.ndarray, sample_rate: int):
     '''
@@ -115,4 +111,5 @@ def extractSpectrogram(audio: np.ndarray, sample_rate: int):
         X_img.append(spectrogram)
     
     X_img = np.asarray(X_img, dtype = "object")
+
     return np.reshape(X_img, (X_img.shape[0], X_img.shape[1], X_img.shape[2], 1))
