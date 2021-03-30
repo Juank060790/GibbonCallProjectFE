@@ -42,18 +42,19 @@ def extractAudio(df: pd.DataFrame, audio: np.ndarray, sample_rate: int,
     * Purpose: Extract calls using a sliding window approach.
     * Parameters:
         - df: Contains timestamps and labels.
-        - audio: Librosa loaded audio
+        - audio: Librosa loaded audio.
         - sample_rate: Audio sampling rate. 
-        - alpha: How many seconds to slide over a given timestamp. 
-        - jump_seconds: Hops between sliding window. 
+        - alpha: Size of the window. 
+        - jump_seconds: Hops between window. 
     * Returns: 
         - An array containing gibbon segments and an array containing 
         non-gibbon segments. 
     * TODO:
         - Determine how we want to deal with non-gibbon class and extract 
         accordingly.
+    * BUG: 
+        - Mismatched shape for segments length. 
     '''
-
 
     positive = ["gc", "mm", "sc"]
     alpha_converted = alpha * sample_rate 
@@ -72,12 +73,46 @@ def extractAudio(df: pd.DataFrame, audio: np.ndarray, sample_rate: int,
 
             extract_segment = audio[int(start_position): int(end_position)]
 
-            if row["Label"] in positive:
+            #Bug here, some segments do not match 48,000 (sample_rate * alpha)
+            matched = len(extract_segment) == alpha_converted
+
+            if row["Label"] in positive and matched:
+                # print(f"Start {row['Start'] / sample_rate} End {row['End'] / sample_rate} Length: {extract_segment.shape}")
                 gibbon.append(extract_segment)
-            else:
+            elif matched:
                 non_gibbon.append(extract_segment)
-        
-    return np.asarray(gibbon, dtype = "object"), \
-        np.asarray(non_gibbon, dtype = "object")
+    
+    gibbon = np.asarray(gibbon)
+    non_gibbon = np.asarray(non_gibbon)
 
 
+    return gibbon, non_gibbon 
+
+def extractSpectrogram(audio: np.ndarray, sample_rate: int):
+    '''
+    * Purpose: Given an array of audio data, convert it to a mel-spectrogram. 
+    * Parameters:
+        - audio: Segments of extracted audio.
+        - sample_rate: Sampling rate when convert to mel-spectrogram.
+    * TODO:
+        - Determine the parameters for mel-spectrogram conversion. 
+    '''
+
+    n_fft = 1024 
+    hop_length = 256
+    n_mels = 128
+    f_min = 1000
+    f_max = 2000 
+
+    X_img = []
+
+    for data in audio:
+        spectrogram = librosa.feature.melspectrogram(
+            data, n_fft = n_fft, hop_length = hop_length, n_mels = n_mels, 
+            sr = sample_rate, power = 1.0, fmin = f_min, fmax = f_max 
+        )
+
+        X_img.append(spectrogram)
+    
+    X_img = np.asarray(X_img, dtype = "object")
+    return np.reshape(X_img, (X_img.shape[0], X_img.shape[1], X_img.shape[2], 1))

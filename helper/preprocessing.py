@@ -17,7 +17,9 @@ import librosa
 LABEL = "Selection Tables"
 OUTPUT = "extracted_audio"
 
-def preprocess(output_path : str, label_path: str, sample_rate: int, alpha: int):
+def preprocess(output_path : str, label_path: str, sample_rate: int, alpha: int,
+               jump_seconds: int):
+
     '''
     * Purpose: Intermediate function that calls readLabels() and extractAudio(),
                found in extract.py. The extracted segments are stored into a 
@@ -27,6 +29,7 @@ def preprocess(output_path : str, label_path: str, sample_rate: int, alpha: int)
         label_path: Path to label files.
         sample_rate: The rate to sample an audio.
         alpha: Number of seconds in extracted audio segments.
+        jump_seconds: Slicing window hop size.
     '''
 
     df = readLabels(label_path, sample_rate)
@@ -65,11 +68,13 @@ def main(output_path: str, label_path: str):
 
     files = [str(file) for file in 
              pathlib.Path(os.path.join(os.getcwd(), label_path)).glob("*.txt")]
-    
+
     for file in files:
-        gibbon, non_gibbon = preprocess(output_path, file, sample_rate, alpha)
+        gibbon, non_gibbon = preprocess(output_path, file, sample_rate, alpha, 
+                                        jump_seconds)
 
         break 
 
 if __name__ == "__main__":
-    main(LABEL, OUTPUT)
+    
+    main(OUTPUT, LABEL)
