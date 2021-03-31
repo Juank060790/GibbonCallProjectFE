@@ -1,3 +1,9 @@
+'''
+Helper functions to extract audio segment and convert to melspectrogram. 
+
+TODO: Bug in extractAudio() function 
+'''
+
 import pathlib 
 import os
 import regex as re
@@ -10,10 +16,10 @@ def readLabels(path: str, sample_rate: int):
     * Purpose: Given a path to a text file containing the labels, read in the 
     information and convert it to a dataframe. 
     * Parameters: 
-        path: Path to file containing the labels. 
-        sample_rate: Audio sampling rate. 
+        - path: Path to file containing the labels. 
+        - sample_rate: Audio sampling rate. 
     * Returns:  
-        df: pd.DataFrame. Columns are start and end timestamps converted in 
+        - df: pd.DataFrame. Columns are start and end timestamps converted in 
         sample rate, path to audio, and the label.
     '''
 

@@ -1,6 +1,4 @@
 '''
-Last updated: 03/27/2021
-
 Main driver to extract audio and perform augmentation.
 
 NOTE: Assumes that in a given label .txt, the audio path is the same 
@@ -30,6 +28,10 @@ def preprocess(output_path : str, label_path: str, sample_rate: int, alpha: int,
         sample_rate: The rate to sample an audio.
         alpha: Number of seconds in extracted audio segments.
         jump_seconds: Slicing window hop size.
+    * Returns:
+        filename: str, audio name. 
+        gibbon: np.ndarray, extracted gibbon call. 
+        non_gibbon: np.ndarray, extracted non-gibbon call. 
     '''
 
     df = readLabels(label_path, sample_rate)
@@ -47,34 +49,62 @@ def preprocess(output_path : str, label_path: str, sample_rate: int, alpha: int,
     with open(os.path.join(absolute_path, "non_gibbon",  audio_pkl), "wb") as file:
         pickle.dump(non_gibbon, file)   
 
-    return gibbon, non_gibbon 
+    return filename, gibbon, non_gibbon 
+
+def executeAugmentation(gibbon: np.ndarray, non_gibbon: np.ndarray, alpha: int, 
+                        sample_rate: int, augmentation_amount_noise: int, 
+                        augmentation_probability: float, 
+                        augmentation_amount_gibbon: int):
+    '''
+    Augment extracted gibbon call.
+    * Parameters:
+        - gibbon: Extracted gibbon call. 
+        - non_gibbon: Extracted non-gibbon call. 
+        - alpha: Number of seconds to keep.
+        - sample_rate: Audio sampling rate.
+        - background_noise: Percentage to add noise to non-gibbon call.
+        - probability: Probability for augmentation 
+        - gibbon_augmentation: Number of times to augment gibbon audio. 
+    * Returns: 
+        - 
+    '''
+
+
+    return 
 
 def main(output_path: str, label_path: str):
     '''
-    Purpose: Main driver to extract segments from raw audio data.
-    Parameters:
-        output_path: Output folder to store extracted audio segments. 
-        label_path: Path to label files.
-    Returns: 
+    * Purpose: Main driver to extract segments from raw audio data.
+    * Parameters:
+        - output_path: Output folder to store extracted audio segments. 
+        - label_path: Path to label files.
+    * Returns: 
         None
     '''
     
     sample_rate = 4800
     alpha = 10
     jump_seconds = 1
-    background_noise = 2
-    gibbon_augmentation = 10
-    probability = 1.0
+
+    number_iterations = 1
+    augmentation_probability = 1
+    augmentation_amount_noise = 2
+    augmentation_amount_gibbon = 10 
 
     files = [str(file) for file in 
              pathlib.Path(os.path.join(os.getcwd(), label_path)).glob("*.txt")]
 
     for file in files:
-        gibbon, non_gibbon = preprocess(output_path, file, sample_rate, alpha, 
-                                        jump_seconds)
+        filename, gibbon, non_gibbon = preprocess(
+            output_path, file, sample_rate, alpha, jump_seconds
+        )
+
+        executeAugmentation(
+            gibbon, non_gibbon, alpha, sample_rate, augmentation_amount_noise,
+            augmentation_probability, augmentation_amount_gibbon 
+        )
 
         break 
 
 if __name__ == "__main__":
-    
     main(OUTPUT, LABEL)
