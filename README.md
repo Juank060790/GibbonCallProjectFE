@@ -53,7 +53,9 @@
      |--- _gibbon: Gibbon audio segments extracted from raw data.
      |--- _non_gibbon: Non-gibbon audio segments extracted from raw data. 
 |--- _helper 
+     |--- augmentation.py: Helper functions to augment audio files.
      |--- extract.py: Helper functions to extract raw audio files. 
+     |--- preprocessing.py: Main driver to extract and augment audio files.
 |--- _Raw Audio Files
      |--- **\*.WAV, raw audio files.
 |--- _research_paper
@@ -61,7 +63,10 @@
      |--- research.pdf
 |--- _Selection Tables
      |--- *.txt, labelled segments in an audio.
+|--- _test_files
+     |--- *.WAV, audio files set aside for testing. 
 |--- README.md
 |--- extraction.ipynb: Tests extracting audio files 
 |--- EDA.ipynb: Analysis of data. 
+|--- Untitled.ipynb
 ```
