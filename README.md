@@ -68,5 +68,6 @@
 |--- README.md
 |--- extraction.ipynb: Tests extracting audio files 
 |--- EDA.ipynb: Analysis of data. 
+|--- requirements.txt: Dependencies. 
 |--- Untitled.ipynb
 ```
