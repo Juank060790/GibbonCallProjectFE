@@ -73,6 +73,7 @@ def extractAudio(df: pd.DataFrame, audio: np.ndarray, sample_rate: int,
     for _, row in df.iterrows():
         jump = 0
         while True:
+            #This part differs from the paper. Check extract_all_non_gibbon_calls
             start_position = row["Start"] - sample_rate - \
                              (jump * jump_seconds * sample_rate)
             end_position = start_position + alpha_converted 
