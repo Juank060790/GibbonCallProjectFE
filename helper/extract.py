@@ -127,8 +127,9 @@ def extractSpectrogram(audio: np.ndarray, sample_rate: int):
             X_img.append(spectrogram)
         
         X_img = np.asarray(X_img, dtype = "object")
+        X_img = X_img.reshape(-1, X_img.shape[1], X_img.shape[2], 1)
 
-        return np.reshape(X_img, (X_img.shape[0], X_img.shape[1], X_img.shape[2], 1))
+        return X_img
         
-    except:
+    except Exception:
         print("Error extracting spectrogram", audio)

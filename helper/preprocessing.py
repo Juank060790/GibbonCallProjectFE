@@ -100,6 +100,7 @@ def toSpectrogram(output_path: str, filename: str, gibbon: np.ndarray,
     '''
 
     if len(gibbon) != 0:
+        # print(f"Gibbon melspectrogram shape: {gibbon.shape}")
         absolute_path = os.path.join(os.getcwd(), output_path)
         gibbon_spectrogram = extractSpectrogram(gibbon, sample_rate)
 
@@ -109,10 +110,10 @@ def toSpectrogram(output_path: str, filename: str, gibbon: np.ndarray,
         try: 
             non_gibbon = non_gibbon[np.random.choice(non_gibbon.shape[0],
                                 gibbon.shape[0], replace = True)]
+            # print(f"Non-gibbon melspectrogram shape: {non_gibbon.shape}")
             non_gibbon_spectrogram = extractSpectrogram(non_gibbon, sample_rate)
             with open(os.path.join(absolute_path, "non_gibbon_spectrogram", filename), "wb") as file:
                 pickle.dump(non_gibbon, file)  
-            # print(f"Non-gibbon spectrogram: {non_gibbon_spectrogram.shape}")
         except Exception:
             pass 
 
