@@ -33,7 +33,7 @@ def baselineModel(input_shape: tuple, conv_layers: int, conv_filters: int,
     return model 
 
 def network():
-    input_shape = (118, 188, 1)
+    input_shape = (128, 188, 1)
     conv_layers = 2
     fc_layers = 1
     max_pooling_size = 4
