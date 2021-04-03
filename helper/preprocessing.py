@@ -34,7 +34,6 @@ def preprocess(output_path : str, label_path: str, sample_rate: int, alpha: int,
     df = readLabels(label_path, sample_rate)
     filename = df["Path"][0]
     audio_pkl = label_path.split("\\")[-1] + ".pkl"
-    # print(audio_pkl)
 
     audio, _ = librosa.load(filename, sr = sample_rate)
 
@@ -137,6 +136,7 @@ def main(output_path: str, label_path: str):
 
     files = [str(file) for file in 
              pathlib.Path(os.path.join(os.getcwd(), label_path)).glob("*.txt")]
+
     print(f"Number of files {len(files)}")
 
     for file in files:
@@ -147,9 +147,6 @@ def main(output_path: str, label_path: str):
         except:
             print(f"{file} doesn't exist")
     
-    # gibbon_file = [str(file) for file in pathlib.Path(os.path.join(output_path, "gibbon")).glob("*")]
-    # non_gibbon_file = [str(file) for file in pathlib.Path(os.path.join(output_path, "non_gibbon")).glob("*")]
-
     end = time.time()
     print(f"Time elapsed: {end - start}")
 

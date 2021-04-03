@@ -45,6 +45,7 @@ def loadSpectrogram(folder: str):
 
     #Validation split 
     X = np.concatenate([gibbon, non_gibbon])
+    #Since we're using softmax, we need the output array to be categorical array.
     y = tf.keras.utils.to_categorical(np.concatenate([y_true, y_false]))
 
     del gibbon, non_gibbon 
@@ -60,8 +61,11 @@ def loadDataset(x_train: np.ndarray, y_train: np.ndarray, x_test: np.ndarray,
     '''
     Load a train and validation tensorflow dataset. 
     '''
-    train = tf.data.Dataset.from_tensor_slices((x_train, y_train))
-    validation = tf.data.Dataset.from_tensor_slices((x_test, y_test))
+    
+    autotune = tf.data.experimental.AUTOTUNE
+
+    train = tf.data.Dataset.from_tensor_slices((x_train, y_train)).batch(32)
+    validation = tf.data.Dataset.from_tensor_slices((x_test, y_test)).batch(32)
 
     return train, validation  
     
