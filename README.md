@@ -2,14 +2,13 @@
 * **TODO**: 
      1) Determine approach to extracting data, i.e hop length, what 
      data to keep...
-     2) Run data extraction and see how many gibbon segments we have.
      3) **BUG**: In extract.py, extractAudio(), there are instances of 
                     shape mismatched. We expect the length of the extracted 
                     audio segment to be 48,000; this is the sampling_rate 
                     multiply by number of seconds to keep.
      4) Determine appropriate parameters to convert an array into 
           melspectrogram.   
-     5) Build a baseline model.
+     5) Data augmentation. 
 
 * Logs:
      - 03/25/2021: Helper function to extract path and audio segments 
@@ -22,6 +21,7 @@
                    into .pkl files. 
      - 04/01/2021: Helper function to convert extracted audio segments into 
                    melspectrogram and store into .pkl files.
+     - 04/03/2021: Build a baseline model. 
           
 * NOTE: 
      - The **BIG** problem with our dataset is that we're assuming input 
@@ -56,6 +56,11 @@
      |--- augmentation.py: Helper functions to augment audio files.
      |--- extract.py: Helper functions to extract raw audio files. 
      |--- preprocessing.py: Main driver to extract and augment audio files.
+|--- _model
+     |--- baseline.py: Baseline model.
+     |--- load.py: Load and extract melspectrogram.
+|--- _prediction
+     |--- post_processing.py
 |--- _Raw Audio Files
      |--- **\*.WAV, raw audio files.
 |--- _research_paper
