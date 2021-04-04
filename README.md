@@ -8,7 +8,9 @@
                     multiply by number of seconds to keep.
      4) Determine appropriate parameters to convert an array into 
           melspectrogram.   
-     5) Data augmentation. 
+     5) Data augmentation.
+     6) Audio normalization.
+     7) Error analysis.
 
 * Logs:
      - 03/25/2021: Helper function to extract path and audio segments 
@@ -22,6 +24,8 @@
      - 04/01/2021: Helper function to convert extracted audio segments into 
                    melspectrogram and store into .pkl files.
      - 04/03/2021: Build a baseline model. 
+     - 04/04/2021: Trained baseline model. 
+          - **Findings**: Small amount of false positive, large amount of false negative
           
 * NOTE: 
      - The **BIG** problem with our dataset is that we're assuming input 
