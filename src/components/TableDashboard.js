@@ -1,22 +1,21 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
-import { Button, Modal, Table } from "react-bootstrap";
+import { Modal, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { audioActions, callActions } from "../redux/actions";
-import { css } from "@emotion/core";
-import { useHistory } from "react-router";
 import PaginationItem from "./Pagination";
 
 export default function TableDashboard() {
-  const [sortBy, setSortBy] = useState("audioId");
-  const [order, setOrder] = useState("desc");
-  const dispatch = useDispatch();
+  const [startDoc, setStartDoc] = useState(null);
   const audios = useSelector((state) => state.audio.audio);
   const loading = useSelector((state) => state.audio.loading);
-  const [limit, setLimit] = useState(10);
-  const [startDoc, setStartDoc] = useState(null);
   const calls = useSelector((state) => state.call);
   const selectedAudio = useSelector((state) => state.audio.selectedAudio);
   const callsIds = selectedAudio?.gibbonCallsIds;
+  const dispatch = useDispatch();
+  const [sortBy, setSortBy] = useState("audioId");
+  const [order, setOrder] = useState("desc");
+  const [limit, setLimit] = useState(10);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -28,6 +27,7 @@ export default function TableDashboard() {
     setSortBy("audioId");
     setLimit(4);
   };
+  // Pagination
 
   const handleClickOnNext = () => {
     if (audios.length >= 1 && !loading) {
@@ -42,6 +42,8 @@ export default function TableDashboard() {
       console.log("PREVIOUS PAGE", startDoc);
     }
   };
+
+  // Get individual audio with a Modal
 
   const toAudioId = (audioId, callsIds) => {
     console.log("audioId", audioId, "CALLSIDS", callsIds);
@@ -65,11 +67,6 @@ export default function TableDashboard() {
   useEffect(() => {
     dispatch(audioActions.audiosRequest(limit, sortBy, order, startDoc));
   }, [dispatch, limit, sortBy, order, startDoc]);
-
-  const override = css`
-    display: block;
-    margin: 0 auto;
-  `;
 
   return (
     <>
@@ -125,8 +122,36 @@ export default function TableDashboard() {
                   </td>
                   <td className="tableSingleKey commentKey">
                     <form>
-                      <textarea className="textareacomments"></textarea>
-                      <input className="submitcommentbtn " type="submit" />
+                      <div className="commentsection">
+                        <div>
+                          {" "}
+                          <textarea
+                            className="textareacomments"
+                            type="submit"
+                            id="commentBox"
+                          ></textarea>
+                          <input className="submitcommentbtn" value="Submit" />
+                        </div>
+                        <div className="buttonscomments">
+                          <div className="savebuttoncontainer">
+                            <FontAwesomeIcon
+                              className="savebutton m-2"
+                              onSubmit={"#"}
+                              icon={["fas", "check"]}
+                              color="#04c45c"
+                            ></FontAwesomeIcon>{" "}
+                          </div>
+                          <div>
+                            <FontAwesomeIcon
+                              className="m-2"
+                              onSubmit={"#"}
+                              icon={["fas", "times"]}
+                              size="1x"
+                              color="red"
+                            ></FontAwesomeIcon>{" "}
+                          </div>
+                        </div>
+                      </div>
                     </form>
                   </td>
                 </tr>

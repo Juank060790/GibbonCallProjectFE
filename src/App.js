@@ -1,12 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./App.css";
 import { BrowserRouter as Router } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { authActions } from "./redux/actions/auth.actions";
 import { ClipLoader } from "react-spinners";
 import Routes from "./Routes";
 import AlertMsg from "./layouts/Alerts";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+
+library.add(fas);
 
 function App() {
   const dispatch = useDispatch();

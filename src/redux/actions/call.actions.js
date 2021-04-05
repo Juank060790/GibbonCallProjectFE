@@ -4,7 +4,7 @@ import api from "../api";
 const getSingleCall = (callId) => async (dispatch) => {
   dispatch({ type: types.GET_SINGLE_CALL_REQUEST, payload: null });
   try {
-    const res = await api.get(`/audio/calls/${callId}`);
+    const res = await api.get(`calls/${callId}`);
     console.log("RESSSPONSE", res);
     dispatch({
       type: types.GET_SINGLE_CALL_REQUEST_SUCCESS,
